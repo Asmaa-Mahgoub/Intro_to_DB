@@ -1,4 +1,4 @@
-# task_3.py
+
 import mysql.connector
 import sys
 
@@ -20,11 +20,11 @@ try:
     # Create a cursor to execute SQL commands
     mycursor = mydb.cursor()
 
-    # Select the database
-    mycursor.execute(f"USE {database_name}")
+    # Explicitly select the database using USE statement
+    mycursor.execute(f"USE {database_name};")
 
     # Execute SHOW TABLES to list all tables
-    mycursor.execute("SHOW TABLES")
+    mycursor.execute("SHOW TABLES;")
     tables = mycursor.fetchall()
 
     # Print the table names
