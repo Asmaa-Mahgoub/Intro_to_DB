@@ -1,4 +1,5 @@
 import mysql.connector
+
 mydb= mysql.connector.connect(
     host="localhost",
     user= "asmaa_mahgoub",
@@ -7,6 +8,9 @@ mydb= mysql.connector.connect(
 )
 
 mycursor= mydb.cursor()
+mycursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+mydb.commit()
+
 mycursor.execute(""" CREATE TABLE IF NOT EXISTS Authors(
 author_id INT PRIMARY KEY,
 author_name VARCHAR(215)
