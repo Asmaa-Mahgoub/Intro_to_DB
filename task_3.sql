@@ -1,37 +1,30 @@
 import mysql.connector
-import sys
-
-# Get database name from command-line argument
-if len(sys.argv) < 2:
-    print("Usage: python task_3.py <alx_book_store>")
-    sys.exit()
-
-alx_book_store = sys.argv[1]
+from mysql.connector import Error
 
 try:
-    # Connect to MySQL server
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="asmaa_mahgoub",
-        password="Asmaa1239",
-        database=alx_book_store  
-    )
+    # Establish connection to MySQL server
+    connection = mysql.connector.connect(
+    host="localhost",
+    user= "asmaa_mahgoub",
+    password= "Asmaa1239"
+)
+    if connection.is_connected():
+        cursor = connection.cursor()
+        # Explicitly select the alx_book_store database
+        cursor.execute("USE alx_book_store;")
+        # Query to list all tables
+        cursor.execute("SHOW TABLES;")
+        tables = cursor.fetchall()
+        
+        # Print each table name
+        for table in tables:
+            print(table[0])
 
-    # Create a cursor to execute SQL commands
-    mycursor = mydb.cursor()
-
-    # Execute SHOW TABLES to list all tables
-    mycursor.execute("SHOW TABLES;")
-    tables = mycursor.fetchall()
-
-    # Print the table names
-    print(f"Tables in '{alx_book_store}':")
-    for table in tables:
-        print(table[0])
-
-except mysql.connector.Error as err:
-    print(f"Error: {err}")
+except Error as e:
+    print(f"Error connecting to MySQL: {e}")
 
 finally:
-        mycursor.close()
-        mydb.close()
+    if connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("MySQL connection closed.")
