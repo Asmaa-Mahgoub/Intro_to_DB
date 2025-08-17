@@ -6,7 +6,7 @@ if len(sys.argv) < 2:
     print("Usage: python task_3.py <alx_book_store>")
     sys.exit()
 
-database_name = sys.argv[1]
+alx_book_store = sys.argv[1]
 
 try:
     # Connect to MySQL server
