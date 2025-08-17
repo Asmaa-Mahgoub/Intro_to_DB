@@ -11,9 +11,10 @@ try:
 
     mycursor= mydb.cursor()
     mycursor.execute("""
-        SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_KEY
+        SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = 'Books'
+        WHERE TABLE_SCHEMA = 'alx_book_store'
+        AND TABLE_NAME = 'Books'
     """)
     for row in mycursor.fetchall():
         print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]}")
