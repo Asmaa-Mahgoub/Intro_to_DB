@@ -18,7 +18,7 @@ try:
 
     # Multiple rows to insert
     sql_insert = """
-    INSERT INTO Customers(customer_id, customer_name, email, address)
+    INSERT INTO customer(customer_id, customer_name, email, address)
     VALUES (%s, %s, %s, %s)
     """
     values = [
