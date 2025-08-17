@@ -1,4 +1,3 @@
-
 import mysql.connector
 import sys
 
@@ -10,18 +9,16 @@ if len(sys.argv) < 2:
 database_name = sys.argv[1]
 
 try:
-    # Connect to MySQL server
+    # Connect to MySQL server and specify the database name
     mydb = mysql.connector.connect(
         host="localhost",
-        user="asmaa_mahgoub",   # your MySQL username
-        password="Asmaa1239"    # your MySQL password
+        user="asmaa_mahgoub",
+        password="Asmaa1239",
+        database=database_name  # The database argument is passed here
     )
 
     # Create a cursor to execute SQL commands
     mycursor = mydb.cursor()
-
-    # Explicitly select the database using USE statement
-    mycursor.execute(f"USE {database_name};")
 
     # Execute SHOW TABLES to list all tables
     mycursor.execute("SHOW TABLES;")
@@ -37,7 +34,7 @@ except mysql.connector.Error as err:
 
 finally:
     # Close cursor and connection
-    if 'mycursor' in locals():
+    if 'mycursor' in locals() and mycursor is not None:
         mycursor.close()
     if 'mydb' in locals() and mydb.is_connected():
         mydb.close()
